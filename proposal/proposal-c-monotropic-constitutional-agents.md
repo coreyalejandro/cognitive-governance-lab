@@ -151,10 +151,8 @@ I am the instrument of observation for RQ3. I am also the person who built the C
 
 ## References
 
-[PENDING — citation verification required before submission]
-
-- Murray, D., Lesser, M., & Lawson, W. (2005). Attention, monotropism and the diagnostic criteria for autism. [Venue to be confirmed — likely Autism journal]
-- Bai, Y. et al. (2022). Constitutional AI: Harmlessness from AI Feedback. Anthropic.
+- Murray, D., Lesser, M., & Lawson, W. (2005). Attention, monotropism and the diagnostic criteria for autism. Autism: The International Journal of Research and Practice, 9(2), 139–156. https://doi.org/10.1177/1362361305051398 [VERIFIED]
+- Bai, Y. et al. (2022). Constitutional AI: Harmlessness from AI Feedback. arXiv preprint arXiv:2212.08073. https://doi.org/10.48550/arXiv.2212.08073 [VERIFIED]
 
 ---
 

@@ -247,9 +247,9 @@ The governance-kernel implementation, datasets, and case-law artifacts are being
 
 [PENDING — full citation list to be verified per Citation Research Protocol before submission. The following are named and will be verified against author, venue, and year before any version submitted externally:]
 
-- Bai, Y. et al. (2022). Constitutional AI: Harmlessness from AI Feedback. Anthropic.
-- Leike, J. et al. Scalable agent alignment via reward modeling. [year and venue to be confirmed]
-- Davis, R. & Garrett-Staib, A. (2013). [Title to be confirmed]. *Focus on Colleges, Universities, and Schools.*
+- Bai, Y. et al. (2022). Constitutional AI: Harmlessness from AI Feedback. arXiv preprint arXiv:2212.08073. https://doi.org/10.48550/arXiv.2212.08073 [VERIFIED]
+- Leike, J. et al. Scalable agent alignment via reward modeling. [PENDING — year and venue to be confirmed before submission]
+- Davis, R. & Garrett-Staib, A. (2013). [Title to be confirmed]. *Focus on Colleges, Universities, and Schools.* [PENDING — full title to be confirmed]
 
 ---
 
