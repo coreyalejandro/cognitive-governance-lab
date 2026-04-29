@@ -15,7 +15,7 @@ See AGENTS.md I6 — Fail Closed — for operational constraints.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional
 import json
@@ -56,12 +56,12 @@ class InvariantState:
     def violate(self, note: str) -> None:
         self.status = InvariantStatus.VIOLATED
         self.violation_note = note
-        self.last_checked = datetime.utcnow().isoformat()
+        self.last_checked = datetime.now(timezone.utc).isoformat()
 
     def restore(self) -> None:
         self.status = InvariantStatus.ACTIVE
         self.violation_note = None
-        self.last_checked = datetime.utcnow().isoformat()
+        self.last_checked = datetime.now(timezone.utc).isoformat()
 
     def to_dict(self) -> dict:
         return {
@@ -92,13 +92,13 @@ class RepairObligation:
     party: RepairParty = RepairParty.UNASSIGNED
     resolved: bool = False
     resolution_note: Optional[str] = None
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     resolved_at: Optional[str] = None
 
     def resolve(self, note: str) -> None:
         self.resolved = True
         self.resolution_note = note
-        self.resolved_at = datetime.utcnow().isoformat()
+        self.resolved_at = datetime.now(timezone.utc).isoformat()
 
     def to_dict(self) -> dict:
         return {
@@ -148,8 +148,8 @@ class ContractWindow:
     )
     repair_obligations: list[RepairObligation] = field(default_factory=list)
     turn_count: int = 0
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
-    last_updated: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    last_updated: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     _obligation_counter: int = field(default=0, repr=False)
 
     # ------------------------------------------------------------------
@@ -306,7 +306,7 @@ class ContractWindow:
         return "\n".join(lines)
 
     def _touch(self) -> None:
-        self.last_updated = datetime.utcnow().isoformat()
+        self.last_updated = datetime.now(timezone.utc).isoformat()
 
 
 # ---------------------------------------------------------------------------

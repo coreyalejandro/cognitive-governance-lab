@@ -18,7 +18,7 @@ See AGENTS.md I6 — Fail Closed — for operational constraints.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional, Callable
 import re
@@ -42,7 +42,7 @@ class ChannelResult:
     verdict: ChannelVerdict
     flags: list[str] = field(default_factory=list)
     notes: str = ""
-    checked_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    checked_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
     def to_dict(self) -> dict:
         return {
