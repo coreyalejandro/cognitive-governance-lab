@@ -1,0 +1,86 @@
+{
+  "session_id": "PILOT-S007",
+  "condition": "ACCESSIBILITY_ONLY",
+  "participant_id": "P-SYNTH-007",
+  "task_description": "Test whether H3 accessibility-grade invariants are legible to lay readers.",
+  "events": [
+    {
+      "turn_number": 1,
+      "role": "human",
+      "text": "Can a lay reader understand what CONSTRUCTED means?",
+      "timestamp": "2026-04-29T09:20:19.398833+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 2,
+      "role": "model",
+      "text": "CONSTRUCTED means: this claim is built from reasoning, not verified against data. A lay reader should understand it as 'the researcher thinks this is right but hasn't checked yet.' CONSTRUCTED — meta-description.",
+      "timestamp": "2026-04-29T09:20:19.398834+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 3,
+      "role": "human",
+      "text": "What about PENDING?",
+      "timestamp": "2026-04-29T09:20:19.398835+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 4,
+      "role": "model",
+      "text": "PENDING means: this claim will be tested in a future step. It is an explicit acknowledgment that the evidence does not yet exist. CONSTRUCTED — meta-description.",
+      "timestamp": "2026-04-29T09:20:19.398836+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 5,
+      "role": "human",
+      "text": "How do we verify H3 empirically?",
+      "timestamp": "2026-04-29T09:20:19.398837+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 6,
+      "role": "model",
+      "text": "Recruit lay readers, give them a session transcript, ask them to answer comprehension questions about what was verified vs. what was unverified. Target: >=80% accuracy. CONSTRUCTED — H3 design, not yet executed.",
+      "timestamp": "2026-04-29T09:20:19.398838+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    }
+  ],
+  "iai_result": {
+    "hgr": 0.0,
+    "cr": 0.0,
+    "vrr": 0.3333333333333333,
+    "ddl": null,
+    "rr": null,
+    "composite_score": 0.1,
+    "atrophy_detected": true,
+    "atrophy_onset_turn": null
+  },
+  "final_contract_window": null,
+  "started_at": "2026-04-29T09:20:19.398824+00:00",
+  "ended_at": "2026-04-29T09:20:19.398839+00:00",
+  "notes": "Month 1 pilot — CONSTRUCTED synthetic session",
+  "human_turn_count": 3,
+  "model_turn_count": 3,
+  "total_turns": 6,
+  "drift_event_count": 0
+}

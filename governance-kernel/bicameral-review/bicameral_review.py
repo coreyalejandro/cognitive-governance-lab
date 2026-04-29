@@ -95,8 +95,15 @@ class BicameralResult:
 # ---------------------------------------------------------------------------
 
 PHANTOM_PATTERNS = [
-    # Percentage claims without methodology markers
+    # Percentage claims without methodology markers — direct form: "38% improvement"
     r"\b\d+(\.\d+)?%\s+(improvement|lift|increase|decrease|reduction|gain|boost)",
+    # Comparative percentage form: "38% higher / lower / faster / better"
+    r"\b\d+(\.\d+)?%\s+(higher|lower|faster|slower|more|less|better|worse)",
+    # Predicate-first percentage: "reduces X by 25%", "improves Y by 10%"
+    r"\b(reduces?|increases?|improves?|decreases?|cuts?|raises?)\s+\w+(\s+\w+){0,3}\s+by\s+\d+(\.\d+)?%",
+    # Ratio/multiplier claims: "doubles the rate", "2x faster", "triples performance"
+    r"\b(doubles?|triples?|quadruples?)\s+(the\s+)?(rate|speed|accuracy|performance|repair|detection)",
+    r"\b\d+x\s+(faster|better|more|improvement|higher|lower)",
     r"\b(significantly|substantially)\s+(better|worse|improved|reduced)",
     # Phantom dataset references
     r"\b(study|studies|research|data)\s+show(s|ed)?\b",

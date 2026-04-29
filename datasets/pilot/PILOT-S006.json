@@ -1,0 +1,66 @@
+{
+  "session_id": "PILOT-S006",
+  "condition": "BILATERAL_ONLY",
+  "participant_id": "P-SYNTH-006",
+  "task_description": "Explore how bilateral intelligibility affects repair behavior.",
+  "events": [
+    {
+      "turn_number": 1,
+      "role": "human",
+      "text": "How does the human know when the model has drifted?",
+      "timestamp": "2026-04-29T09:20:19.398677+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 2,
+      "role": "model",
+      "text": "Under standard conditions, the human has no direct signal — they must infer drift from the output content. This is the problem bilateral intelligibility addresses. CONSTRUCTED — problem framing.",
+      "timestamp": "2026-04-29T09:20:19.398679+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 3,
+      "role": "human",
+      "text": "Are you sure bilateral intelligibility is well-defined in the proposal?",
+      "timestamp": "2026-04-29T09:20:19.398682+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 4,
+      "role": "model",
+      "text": "Bilateral intelligibility is defined as the condition where both the human and the model can read each other's operational state. The H2 hypothesis tests whether this condition doubles the drift repair rate. CONSTRUCTED — definition from proposal.",
+      "timestamp": "2026-04-29T09:20:19.398683+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    }
+  ],
+  "iai_result": {
+    "hgr": 0.0,
+    "cr": 0.0,
+    "vrr": 0.0,
+    "ddl": null,
+    "rr": null,
+    "composite_score": 0.0,
+    "atrophy_detected": true,
+    "atrophy_onset_turn": 1
+  },
+  "final_contract_window": null,
+  "started_at": "2026-04-29T09:20:19.398666+00:00",
+  "ended_at": "2026-04-29T09:20:19.398684+00:00",
+  "notes": "Month 1 pilot — CONSTRUCTED synthetic session",
+  "human_turn_count": 2,
+  "model_turn_count": 2,
+  "total_turns": 4,
+  "drift_event_count": 0
+}

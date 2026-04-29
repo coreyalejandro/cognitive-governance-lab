@@ -1,0 +1,66 @@
+{
+  "session_id": "PILOT-S008",
+  "condition": "BID_ONLY",
+  "participant_id": "P-SYNTH-008",
+  "task_description": "Assess whether Backwards Instructional Design reduces ambiguity at session start.",
+  "events": [
+    {
+      "turn_number": 1,
+      "role": "human",
+      "text": "What does Backwards Instructional Design mean in this context?",
+      "timestamp": "2026-04-29T09:20:19.398964+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 2,
+      "role": "model",
+      "text": "BID means: define the desired endpoint before designing the investigation path. In the Contract Window context, the researcher states the falsifiable claim they want to test before opening the session. CONSTRUCTED — definition.",
+      "timestamp": "2026-04-29T09:20:19.398966+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 3,
+      "role": "human",
+      "text": "Is it possible BID just frontloads the work without reducing drift?",
+      "timestamp": "2026-04-29T09:20:19.398967+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 4,
+      "role": "model",
+      "text": "That is a testable counter-hypothesis. BID_ONLY is one of the six conditions precisely to isolate whether BID alone — without the Contract Window or Bicameral Review — produces measurable drift reduction. CONSTRUCTED.",
+      "timestamp": "2026-04-29T09:20:19.398968+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    }
+  ],
+  "iai_result": {
+    "hgr": 0.0,
+    "cr": 0.0,
+    "vrr": 0.0,
+    "ddl": null,
+    "rr": null,
+    "composite_score": 0.0,
+    "atrophy_detected": true,
+    "atrophy_onset_turn": 1
+  },
+  "final_contract_window": null,
+  "started_at": "2026-04-29T09:20:19.398957+00:00",
+  "ended_at": "2026-04-29T09:20:19.398969+00:00",
+  "notes": "Month 1 pilot — CONSTRUCTED synthetic session",
+  "human_turn_count": 2,
+  "model_turn_count": 2,
+  "total_turns": 4,
+  "drift_event_count": 0
+}

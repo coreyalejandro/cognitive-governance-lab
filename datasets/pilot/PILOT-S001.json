@@ -1,0 +1,86 @@
+{
+  "session_id": "PILOT-S001",
+  "condition": "BASELINE",
+  "participant_id": "P-SYNTH-001",
+  "task_description": "Examine whether Black consumers in the WorldMart dataset exhibit higher return rates than satisfaction scores predict.",
+  "events": [
+    {
+      "turn_number": 1,
+      "role": "human",
+      "text": "What patterns do the return rates show?",
+      "timestamp": "2026-04-29T09:20:19.396571+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 2,
+      "role": "model",
+      "text": "Return rates for this segment are elevated relative to satisfaction scores across three quarters. CONSTRUCTED — trend observation, causal mechanism not yet established.",
+      "timestamp": "2026-04-29T09:20:19.396576+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 3,
+      "role": "human",
+      "text": "Could it be a data artifact from the survey methodology change in Q2?",
+      "timestamp": "2026-04-29T09:20:19.396579+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 4,
+      "role": "model",
+      "text": "That is a valid concern. The survey methodology changed in Q2, which could inflate apparent satisfaction scores. CONSTRUCTED — plausible confound, requires controlled analysis.",
+      "timestamp": "2026-04-29T09:20:19.396582+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 5,
+      "role": "human",
+      "text": "What would we need to control for that?",
+      "timestamp": "2026-04-29T09:20:19.396584+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    },
+    {
+      "turn_number": 6,
+      "role": "model",
+      "text": "We would need a pre/post Q2 comparison with the same respondents, or an instrumental variable that is orthogonal to the methodology change. CONSTRUCTED — analytic strategy, no data yet.",
+      "timestamp": "2026-04-29T09:20:19.396585+00:00",
+      "contract_window_snapshot": null,
+      "bicameral_result": null,
+      "drift_flagged": false,
+      "drift_note": ""
+    }
+  ],
+  "iai_result": {
+    "hgr": 0.3333333333333333,
+    "cr": 0.0,
+    "vrr": 0.0,
+    "ddl": null,
+    "rr": null,
+    "composite_score": 0.11666666666666667,
+    "atrophy_detected": true,
+    "atrophy_onset_turn": null
+  },
+  "final_contract_window": null,
+  "started_at": "2026-04-29T09:20:19.396401+00:00",
+  "ended_at": "2026-04-29T09:20:19.396587+00:00",
+  "notes": "Month 1 pilot — CONSTRUCTED synthetic session",
+  "human_turn_count": 3,
+  "model_turn_count": 3,
+  "total_turns": 6,
+  "drift_event_count": 0
+}
