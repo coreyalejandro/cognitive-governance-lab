@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-Bicameral Review is a dual-channel output gating mechanism designed to intercept LLM-generated text before it reaches the user. The name is structural: two independent review processes must both clear before output is released. Neither channel can override the other. Both must pass. If either channel holds, the output is blocked.
+Bicameral Review is a dual-channel output gating mechanism designed to intercept LLM-generated text before it reaches the user. **The term is borrowed from legislative systems — specifically the bicameral legislature structure in which two separate chambers (such as a Senate and a House of Representatives) must independently pass a bill before it becomes law. Neither chamber can override the other. TLC applies this structural property to AI output review: the same output must independently pass two evaluative processes with different failure criteria, with no shared state between channels during review.** The name is structural: two independent review processes must both clear before output is released. Neither channel can override the other. Both must pass. If either channel holds, the output is blocked.
 
 The two channels are:
 

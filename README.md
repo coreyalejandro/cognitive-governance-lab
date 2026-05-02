@@ -58,7 +58,7 @@ https://youtu.be/7iqq1nRdKFg
 
 ## Related Repositories
 
-- [the-living-constitution](https://github.com/coreyalejandro/the-living-constitution) — TLC Guardian Kernel and Agent Republic
+- [the-living-constitution](https://github.com/coreyalejandro/the-living-constitution) — Runtime governance enforcement layer: Guardian Kernel (MCP safety enforcement), SentinelOS invariant platform, Evidence Observatory, BID harness, constitutional evaluators. TLC governs; CGL researches.
 - [crsp-afs-2026](https://github.com/coreyalejandro/crsp-afs-2026) — C-RSP governance contracts (C-RSP-001 through C-RSP-006)
 - [tlc-artifacts](https://github.com/coreyalejandro/tlc-artifacts) — Constitutional judgment artifacts and session data
 

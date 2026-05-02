@@ -47,3 +47,7 @@ datasets/sessions/raw/
 # Environment variables — never commit secrets
 .env
 .env.local
+
+# OpenMemory - IDE/Assistant specific rules
+.cursor/rules/openmemory.mdc
+AGENTS.md

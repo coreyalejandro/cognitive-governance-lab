@@ -45,6 +45,8 @@ This is not bureaucracy. It is the mechanism. Operating without it degrades Inte
 
 ## Bicameral Review
 
+The term is borrowed from legislative systems — two separate chambers that must both pass a bill before it becomes law, with neither able to override the other. The architectural property being imported is enforced independence: the same output must survive two different evaluative processes with different failure criteria. No shared state between channels during review.
+
 Before committing any output (code, documentation, research claim), pass it through both channels:
 
 **Relational Channel:** Does this output serve the investigative arc? Does it advance the research question without degrading the human's capacity to think about it?
