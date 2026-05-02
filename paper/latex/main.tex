@@ -20,12 +20,36 @@
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{xspace}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit,backgrounds,shadows}
+\usepackage{subcaption}
 
 % --- Colors ---
 \definecolor{darkblue}{rgb}{0, 0, 0.5}
 \definecolor{pendingred}{rgb}{0.75, 0.1, 0.1}
 \definecolor{verifiedgreen}{rgb}{0.05, 0.5, 0.05}
 \hypersetup{colorlinks=true, citecolor=darkblue, linkcolor=darkblue, urlcolor=darkblue}
+
+% Okabe-Ito colorblind-safe palette
+\definecolor{okblue}{HTML}{0072B2}
+\definecolor{okorange}{HTML}{E69F00}
+\definecolor{okgreen}{HTML}{009E73}
+\definecolor{okred}{HTML}{D55E00}
+\definecolor{okpurple}{HTML}{CC79A7}
+\definecolor{okcyan}{HTML}{56B4E9}
+\definecolor{okyellow}{HTML}{F0E442}
+\definecolor{okgray}{HTML}{999999}
+
+% TikZ shared styles
+\tikzset{
+  cwbox/.style={rectangle, rounded corners=4pt, draw=#1!70!black,
+    fill=#1!15, minimum height=1.1cm, minimum width=2.6cm,
+    align=center, font=\small\bfseries, text=#1!60!black},
+  arrowstd/.style={-{Stealth[length=3mm,width=2mm]}, thick, color=#1},
+  labelstd/.style={font=\scriptsize, midway},
+  shadowbox/.style={drop shadow={shadow xshift=1pt,shadow yshift=-1pt,
+    opacity=0.25}},
+}
 
 % --- Convenience macros ---
 \newcommand{\cw}{Contract Window\xspace}
@@ -106,6 +130,87 @@ gradual shifts in session context can progressively erode safety boundaries
 outputs drives over-reliance that suppresses independent judgment
 \citep{schemmer2022appropriate, disanti2026cognitive}.
 
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=0.9cm and 2.0cm]
+  % ---- LEFT: Insight Atrophy trajectory (no CW) ----
+  \node[rectangle, rounded corners=3pt, draw=okred!70, fill=okred!10,
+        minimum width=3.2cm, minimum height=0.85cm, align=center,
+        font=\small\bfseries, text=okred!70!black] (t0)
+        {Turn 1\\Full hypothesis space};
+  \node[rectangle, rounded corners=3pt, draw=okred!70, fill=okred!18,
+        minimum width=2.6cm, minimum height=0.85cm, align=center,
+        font=\small, text=okred!70!black, below=of t0] (t1)
+        {Turn 10\\Narrowing};
+  \node[rectangle, rounded corners=3pt, draw=okred!80, fill=okred!28,
+        minimum width=1.8cm, minimum height=0.85cm, align=center,
+        font=\small, text=okred!80!black, below=of t1] (t2)
+        {Turn 22\\Scope $-92\%$};
+  \node[rectangle, rounded corners=3pt, draw=okred!90, fill=okred!40,
+        minimum width=1.0cm, minimum height=0.85cm, align=center,
+        font=\small\bfseries, text=white, below=of t2] (t3)
+        {Turn 30\\Atrophy};
+  \foreach \a/\b in {t0/t1, t1/t2, t2/t3}
+    \draw[-{Stealth[length=2.5mm]}, thick, okred!70] (\a) -- (\b);
+  \node[font=\small\bfseries, text=okred!80!black, above=0.15cm of t0]
+       {\textit{Without Contract Window}};
+  % funnel shape overlay
+  \begin{scope}[on background layer]
+    \fill[okred!6, rounded corners=6pt]
+      ([xshift=-2.2cm,yshift=0.5cm]t0.north) --
+      ([xshift= 2.2cm,yshift=0.5cm]t0.north) --
+      ([xshift= 0.7cm,yshift=-0.4cm]t3.south) --
+      ([xshift=-0.7cm,yshift=-0.4cm]t3.south) -- cycle;
+  \end{scope}
+  % ---- DIVIDER ----
+  \node[font=\large\bfseries, text=okgray, right=1.4cm of t1] (vs) {\textbf{vs.}};
+  % ---- RIGHT: CW-governed session ----
+  \node[rectangle, rounded corners=3pt, draw=okgreen!70, fill=okgreen!10,
+        minimum width=3.2cm, minimum height=0.85cm, align=center,
+        font=\small\bfseries, text=okgreen!60!black,
+        right=2.8cm of t0] (g0)
+        {Turn 1\\Full hypothesis space};
+  \node[rectangle, rounded corners=3pt, draw=okgreen!70, fill=okgreen!12,
+        minimum width=3.2cm, minimum height=0.85cm, align=center,
+        font=\small, text=okgreen!60!black, below=of g0] (g1)
+        {Turn 10\\Hypotheses maintained};
+  \node[rectangle, rounded corners=3pt, draw=okgreen!70, fill=okgreen!14,
+        minimum width=3.2cm, minimum height=0.85cm, align=center,
+        font=\small, text=okgreen!60!black, below=of g1] (g2)
+        {Turn 22\\$H$-rate 0.9/turn};
+  \node[rectangle, rounded corners=3pt, draw=okgreen!80, fill=okgreen!20,
+        minimum width=3.2cm, minimum height=0.85cm, align=center,
+        font=\small\bfseries, text=okgreen!70!black, below=of g2] (g3)
+        {Turn 30\\Intent fidelity};
+  \foreach \a/\b in {g0/g1, g1/g2, g2/g3}
+    \draw[-{Stealth[length=2.5mm]}, thick, okgreen!70] (\a) -- (\b);
+  \node[font=\small\bfseries, text=okgreen!70!black, above=0.15cm of g0]
+       {\textit{With Contract Window (C6)}};
+  % ---- CW badge ----
+  \node[rectangle, rounded corners=5pt, draw=okblue!80, fill=okblue!12,
+        minimum width=3.0cm, minimum height=0.7cm, align=center,
+        font=\footnotesize\bfseries, text=okblue!70!black,
+        right=0.5cm of g1] (cw)
+        {\cw\\\footnotesize$(\mathcal{T},\mathcal{V},\mathcal{R},\mathcal{Q})$};
+  \draw[{Stealth[length=2mm]}-{Stealth[length=2mm]}, thick, okblue!60,
+        dashed] (g1) -- (cw);
+  % ---- Bottom annotation ----
+  \node[font=\footnotesize, text=okgray, align=center,
+        below=0.5cm of $(t3)!0.5!(g3)$]
+       {Scope contraction score $S(t_i)$ drives $\text{IAI}(t_i)$ below threshold
+        $\theta$~[Eq.~\ref{eq:iai}]};
+\end{tikzpicture}
+\caption{\textbf{Insight Atrophy vs.\ Contract Window governance.}
+Without a governance layer (left), fluent AI outputs cause progressive
+hypothesis-space contraction: by turn~22 the scope has shrunk by 92\% in
+annotated simulations. With the Contract Window active (right), the
+four-field runtime artifact $(\mathcal{T},\mathcal{V},\mathcal{R},\mathcal{Q})$
+maintains bilateral investigative fidelity; hypothesis generation rate holds
+at 0.9/turn. Values are from annotated methodology illustrations, not live
+experimental results~\pending{H1--H3 pending IRB}.}
+\label{fig:ia-mechanism}
+\end{figure}
+
 \ia{} falls hardest on the populations for whom AI was supposedly built to
 expand access: neurodivergent operators whose investigative arcs are deep and
 single-tunnel; under-resourced communities whose health, legal, and financial
@@ -114,7 +219,7 @@ behavior and experience operate through interpretive frameworks the model was
 never trained to hold. For these users, \ia{} is not an edge case. It is the
 default trajectory.
 
-\paragraph{Contributions.} This paper makes four contributions:
+\paragraph{Contributions.} This paper makes four contributions (\cref{fig:ia-mechanism,fig:cw-arch,fig:factorial,fig:domains}):
 
 \begin{enumerate}
 \item \textbf{\ia}: a formal definition of the failure mode, its mechanism
@@ -309,6 +414,95 @@ Repair Obligation is written to $\mathcal{R}$.
 engine (bicameral-active sessions only). \verified{Synthetic labels only; live
 human IRR is PENDING.}
 
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=1.0cm and 1.4cm, font=\small]
+
+  %% ---- Four CW fields (top row) ----
+  \node[rectangle, rounded corners=4pt, draw=okblue!80, fill=okblue!12,
+        minimum width=2.5cm, minimum height=1.0cm, align=center,
+        font=\small\bfseries, text=okblue!70!black] (T)
+        {$\mathcal{T}$\\Task State};
+  \node[rectangle, rounded corners=4pt, draw=okgreen!80, fill=okgreen!12,
+        minimum width=2.5cm, minimum height=1.0cm, align=center,
+        font=\small\bfseries, text=okgreen!60!black, right=0.6cm of T] (V)
+        {$\mathcal{V}$\\Invariant\\Status};
+  \node[rectangle, rounded corners=4pt, draw=okorange!80, fill=okorange!12,
+        minimum width=2.5cm, minimum height=1.0cm, align=center,
+        font=\small\bfseries, text=okorange!70!black, right=0.6cm of V] (R)
+        {$\mathcal{R}$\\Repair\\Obligations};
+  \node[rectangle, rounded corners=4pt, draw=okpurple!80, fill=okpurple!12,
+        minimum width=2.5cm, minimum height=1.0cm, align=center,
+        font=\small\bfseries, text=okpurple!70!black, right=0.6cm of R] (Q)
+        {$\mathcal{Q}$\\Truth\\Status};
+
+  %% ---- CW bracket label ----
+  \begin{scope}[on background layer]
+    \node[rectangle, rounded corners=6pt, draw=okblue!30, fill=okblue!4,
+          fit=(T)(Q), inner sep=8pt, label={[font=\footnotesize\bfseries,
+          text=okblue!70!black]above:\cw\ $\mathcal{W}=(\mathcal{T},
+          \mathcal{V},\mathcal{R},\mathcal{Q})$}] (cwframe) {};
+  \end{scope}
+
+  %% ---- BicameralReview engine below ----
+  \node[rectangle, rounded corners=5pt, draw=okgray!70, fill=okgray!10,
+        minimum width=3.8cm, minimum height=1.0cm, align=center,
+        font=\small\bfseries, text=okgray!70!black,
+        below=1.4cm of $(V)!0.5!(R)$] (bic)
+        {BicameralReview\\Engine};
+
+  %% ---- Two channels ----
+  \node[rectangle, rounded corners=3pt, draw=okcyan!70, fill=okcyan!10,
+        minimum width=2.8cm, minimum height=0.8cm, align=center,
+        font=\scriptsize, text=okcyan!60!black,
+        below left=0.8cm and 0.2cm of bic] (rel)
+        {Relational Channel:\\serves investigative arc?};
+  \node[rectangle, rounded corners=3pt, draw=okred!70, fill=okred!10,
+        minimum width=2.8cm, minimum height=0.8cm, align=center,
+        font=\scriptsize, text=okred!60!black,
+        below right=0.8cm and 0.2cm of bic] (saf)
+        {Safety Channel:\\violates I1--I6?};
+
+  %% ---- Arrows CW -> BicameralReview ----
+  \draw[-{Stealth[length=2.5mm]}, thick, okblue!60]
+    (V.south) -- ++(0,-0.5) -| (bic.north);
+  \draw[-{Stealth[length=2.5mm]}, thick, okorange!60]
+    (R.south) -- ++(0,-0.5) -| (bic.north);
+
+  %% ---- Arrows BicameralReview -> channels ----
+  \draw[-{Stealth[length=2.5mm]}, thick, okcyan!70] (bic) -- (rel);
+  \draw[-{Stealth[length=2.5mm]}, thick, okred!70]  (bic) -- (saf);
+
+  %% ---- Output gate ----
+  \node[diamond, draw=okgreen!80, fill=okgreen!15, minimum size=1.0cm,
+        align=center, font=\scriptsize\bfseries, text=okgreen!60!black,
+        below=1.0cm of bic] (gate) {Both\\clear?};
+  \draw[-{Stealth[length=2.5mm]}, thick, okgray!60] (rel.south) |- (gate.west);
+  \draw[-{Stealth[length=2.5mm]}, thick, okgray!60] (saf.south) |- (gate.east);
+
+  \node[font=\scriptsize, text=okgreen!60!black, right=0.6cm of gate] (out)
+       {\textbf{Output proceeds}};
+  \node[font=\scriptsize, text=okred!60!black, below=0.5cm of gate] (rep)
+       {\textbf{Write Repair Obligation} $\rightarrow \mathcal{R}$};
+  \draw[-{Stealth[length=2mm]}, okgreen!70, thick] (gate.east) -- (out);
+  \draw[-{Stealth[length=2mm]}, okred!70, thick]   (gate.south) -- (rep);
+
+  %% ---- Repair feeds back to CW ----
+  \draw[-{Stealth[length=2mm]}, okorange!60, thick, dashed]
+    (rep.west) -- ++(-1.2,0) |- (R.south);
+
+\end{tikzpicture}
+\caption{\textbf{Contract Window architecture and BicameralReview enforcement
+loop.} The four-field artifact $\mathcal{W}$ captures Task State ($\mathcal{T}$),
+Invariant Status ($\mathcal{V}$), Repair Obligations ($\mathcal{R}$), and Truth
+Status ($\mathcal{Q}$). Per turn, the BicameralReview engine evaluates two
+channels: the Relational Channel (does the output serve the investigative arc?)
+and the Safety Channel (does it violate any of I1--I6?). Both must clear for
+output to proceed; failure writes a Repair Obligation back to $\mathcal{R}$
+(dashed loop).}
+\label{fig:cw-arch}
+\end{figure}
+
 \subsection{Design Origin: Multi-System Convergence}
 
 A methodological note with safety implications: this architecture was not
@@ -332,6 +526,89 @@ cross-vendor replication in progress.}
 Between-subjects design. Participants assigned to exactly one condition.
 \pending{All conditions: IRB approval and recruitment are Month 1 deliverables.
 No live data collected at submission.}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small, node distance=0.5cm and 0.7cm]
+
+  %% ---- Column headers: Invariant set ----
+  \node[rectangle, rounded corners=3pt, draw=okred!60, fill=okred!10,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\small\bfseries, text=okred!70!black] (h1)
+        {I1--I5 (Standard CAI)};
+  \node[rectangle, rounded corners=3pt, draw=okgreen!80, fill=okgreen!12,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\small\bfseries, text=okgreen!60!black, right=0.6cm of h1] (h2)
+        {I1--I6 (CW Active)};
+
+  %% ---- Row headers: domain ----
+  \node[rectangle, rounded corners=3pt, draw=okgray!50, fill=okgray!8,
+        minimum width=2.8cm, minimum height=0.75cm, align=center,
+        font=\small, text=okgray!70!black,
+        below=1.3cm of $(h1)!-0.5!(h2)$] (r1h)
+        {Black Consumer\\(Eight Wonders)};
+  \node[rectangle, rounded corners=3pt, draw=okgray!50, fill=okgray!8,
+        minimum width=2.8cm, minimum height=0.75cm, align=center,
+        font=\small, text=okgray!70!black, below=0.5cm of r1h] (r2h)
+        {Graves' Disease\\(Black Women)};
+  \node[rectangle, rounded corners=3pt, draw=okgray!50, fill=okgray!8,
+        minimum width=2.8cm, minimum height=0.75cm, align=center,
+        font=\small, text=okgray!70!black, below=0.5cm of r2h] (r3h)
+        {CGL Investigative\\Arc (H-AI)};
+
+  %% ---- Baseline cells (C1-C3) ----
+  \node[rectangle, rounded corners=3pt, draw=okred!40, fill=okred!6,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\scriptsize, text=okred!60!black,
+        right=2.9cm of r1h] (c1) {C1: $n=20$ \textbf{(H1 baseline)}};
+  \node[rectangle, rounded corners=3pt, draw=okred!40, fill=okred!6,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\scriptsize, text=okred!60!black,
+        right=2.9cm of r2h] (c2) {C2: $n=20$ \textbf{(H1 baseline)}};
+  \node[rectangle, rounded corners=3pt, draw=okred!40, fill=okred!6,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\scriptsize, text=okred!60!black,
+        right=2.9cm of r3h] (c3) {C3: $n=20$ \textbf{(H1 baseline)}};
+
+  %% ---- CW-active cells (C4-C6) ----
+  \node[rectangle, rounded corners=3pt, draw=okgreen!60, fill=okgreen!10,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\scriptsize, text=okgreen!60!black,
+        right=0.6cm of c1] (c4) {C4: $n=20$ \textbf{H1+H3}};
+  \node[rectangle, rounded corners=3pt, draw=okgreen!60, fill=okgreen!10,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\scriptsize, text=okgreen!60!black,
+        right=0.6cm of c2] (c5) {C5: $n=20$ \textbf{H1+H2}};
+  \node[rectangle, rounded corners=3pt, draw=okgreen!60, fill=okgreen!10,
+        minimum width=3.8cm, minimum height=0.75cm, align=center,
+        font=\scriptsize, text=okgreen!60!black,
+        right=0.6cm of c3] (c6) {C6: $n=20$ \textbf{H1+H2+H3}};
+
+  %% ---- Hypothesis key ----
+  \node[font=\scriptsize, text=okgray!80!black, align=center,
+        below=0.9cm of $(c3)!0.5!(c6)$] (leg)
+        {\textbf{H1}: Scope $S(t_i)\geq\theta$\enspace
+         \textbf{H2}: Over-reliance $\downarrow$\enspace
+         \textbf{H3}: I6 compliance $\geq 0.80$ on atypical pops.};
+
+  \begin{scope}[on background layer]
+    \node[rectangle, rounded corners=6pt, draw=okgray!25, fill=okgray!3,
+          fit=(r1h)(c6)(r3h)(leg), inner sep=8pt,
+          label={[font=\footnotesize,text=okgray!55!black]below:
+          $N=120$ total transcripts across 6 conditions}] {};
+  \end{scope}
+
+\end{tikzpicture}
+\caption{\textbf{Six-condition $3{\times}2$ factorial design.}
+Rows: three empirical domains.
+Columns: standard Constitutional AI invariants I1--I5 (baseline, red) vs.\
+Contract Window with I6 active (treatment, green).
+Each cell: $n=20$ transcripts. The treatment cells (C4--C6) are the primary
+test beds for H1, H2, and H3; cells C1--C3 provide domain-matched baselines.
+\pending{Data collection pending IRB approval; no live data collected at
+submission.}}
+\label{fig:factorial}
+\end{figure}
 
 \begin{table}[t]
 \centering
@@ -426,6 +703,70 @@ Live pilot (10 sessions) & Not yet run & --- & \pending{IRB} \\
 The experimental design tests the \cw{} in controlled conditions. Three
 empirical domains establish the stakes and generalizability of \ia{} as a
 failure mode.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small, node distance=0.5cm]
+
+  %% ---- Domain 1 ----
+  \node[rectangle, rounded corners=5pt, draw=okorange!80, fill=okorange!10,
+        minimum width=11.2cm, minimum height=1.1cm, align=center,
+        font=\small\bfseries, text=okorange!70!black] (d1)
+        {Domain 1: Black Consumer Behavior \textbf{(Eight Wonders / Relational Economy)}\\
+        \footnotesize Enacted Fidelity, Covenant Loyalty, Generative Epistemic Invariants
+        (GEI) --- missing from standard models};
+
+  %% ---- Domain 2 ----
+  \node[rectangle, rounded corners=5pt, draw=okpurple!70, fill=okpurple!8,
+        minimum width=11.2cm, minimum height=1.1cm, align=center,
+        font=\small\bfseries, text=okpurple!60!black,
+        below=of d1] (d2)
+        {Domain 2: Black Women's Health \textbf{(Graves' Disease / Narrative-First CRISP-DM)}\\
+        \footnotesize 3--5 yr diagnostic gap; model defaults to population-average
+        thyroid presentation; narrative arc suppressed};
+
+  %% ---- Domain 3 ----
+  \node[rectangle, rounded corners=5pt, draw=okcyan!70, fill=okcyan!8,
+        minimum width=11.2cm, minimum height=1.1cm, align=center,
+        font=\small\bfseries, text=okcyan!60!black,
+        below=of d2] (d3)
+        {Domain 3: Human-AI Investigative Arc \textbf{(CGL Experiment)}\\
+        \footnotesize Monotropic operator + AI session; SIAC loop; CW as governance
+        layer; H-rate, V\&T compliance, BicameralReview};
+
+  %% ---- Shared IA arrow (left side) ----
+  \draw[-{Stealth[length=3mm]}, very thick, okred!70]
+    ([xshift=-0.5cm]d1.west) -- node[left, font=\scriptsize\bfseries,
+    text=okred!70!black, rotate=90, xshift=0.6cm] {Insight Atrophy risk}
+    ([xshift=-0.5cm]d3.west);
+
+  %% ---- Shared CW column (right side) ----
+  \node[rectangle, rounded corners=5pt, draw=okblue!60, fill=okblue!8,
+        minimum width=2.4cm, minimum height=3.9cm, align=center,
+        font=\small\bfseries, text=okblue!60!black,
+        right=0.4cm of $(d1.east)!0.5!(d3.east)$] (cwall)
+        {\cw\\\footnotesize I6 enforcement\\\footnotesize per domain};
+
+  \foreach \d in {d1, d2, d3}
+    \draw[-{Stealth[length=2mm]}, thick, okblue!50, dashed]
+      (\d.east) -- (cwall.west|-\d);
+
+  %% ---- Bottom note ----
+  \node[font=\footnotesize, text=okgray!70!black, align=center,
+        below=0.6cm of d3]
+       {Each domain provides 40 transcripts (20 baseline + 20 CW-active)
+        toward the full $N=120$ factorial.};
+
+\end{tikzpicture}
+\caption{\textbf{Three empirical domains where Insight Atrophy is the expected
+default.} Each domain targets a population whose interpretive framework is
+absent from standard AI training distributions. The left axis shows the shared
+Insight Atrophy risk vector; the right column shows the Contract Window acting
+as a per-domain enforcement layer enforcing Invariant I6 (population-specific
+epistemic frames). All three domains contribute to the $N=120$ factorial (40
+transcripts per domain, 20 per condition).}
+\label{fig:domains}
+\end{figure}
 
 \subsection{Black Consumer Behavior: The Relational Economy}
 
